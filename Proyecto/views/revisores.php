@@ -146,6 +146,6 @@
     </div>
     <?php require __DIR__ . "/../public/components/footer.php"?>
 
-    <script src="/public/assets/js/revisores.js"></script>
+    <script src="/Proyecto/public/assets/js/revisores.js"></script>
 </body>
 </html>
