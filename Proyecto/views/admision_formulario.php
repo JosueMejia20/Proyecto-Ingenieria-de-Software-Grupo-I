@@ -7,8 +7,8 @@
     <link rel="icon" href="https://lepidopterahonduras.wordpress.com/wp-content/uploads/2015/04/cropped-escudo-unah-22.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/public/assets/css/nav_footer.css">
-    <link rel="stylesheet" href="/public/assets/css/formulario_style.css">
+    <link rel="stylesheet" href="/Proyecto/public/assets/css/nav_footer.css">
+    <link rel="stylesheet" href="/Proyecto/public/assets/css/formulario_style.css">
 </head>
 <body>
     <?php require __DIR__ . "/../public/components/navbar.php"?>
