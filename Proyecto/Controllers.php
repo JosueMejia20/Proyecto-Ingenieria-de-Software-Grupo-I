@@ -15,9 +15,9 @@ class Controllers{
         include __DIR__."/views/revisores.php";
     }
 
-    public function renderAdmissionsForm(){
+    public function esutidantesrender(){
         http_response_code(200);
-        include __DIR__."/views/formulario_admisiones.php";
+        include __DIR__."/views/estudiante.php";
     }
 
     public function renderAdmissionsChecking(){

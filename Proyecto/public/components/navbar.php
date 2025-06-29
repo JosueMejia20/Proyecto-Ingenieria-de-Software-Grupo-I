@@ -23,7 +23,7 @@
                             Sistema de Pregrado
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="admisionesDropdown">
-                            <li><a class="dropdown-item" href="#">Esutidantes</a></li>
+                            <li><a class="dropdown-item" href="/estudiantes/perfil">Esutidantes</a></li>
                             <li><a class="dropdown-item" href="#">Docentes</a></li>
                             <li><a class="dropdown-item" href="#">Coordinador</a></li>
                             <li><a class="dropdown-item" href="#">Jefe de Departamento</a></li>

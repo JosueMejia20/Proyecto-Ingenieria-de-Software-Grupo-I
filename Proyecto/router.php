@@ -7,7 +7,7 @@ $router = new Router;
 $router->addRoute("GET", "/", "Controllers", "landing");
 $router->addRoute("GET", "/formulario", "Controllers", "formulario");
 $router->addRoute("GET", "/revisor/solicitud", "Controllers", "revisores");
-
+$router->addRoute("GET", "/estudiantes/perfil", "Controllers", "esutidantesrender");
 // Normalizar URI quitando el prefijo /Proyecto
 $basePath = "/Proyecto";
 $uri = str_replace($basePath, "", $_SERVER["REQUEST_URI"]);
