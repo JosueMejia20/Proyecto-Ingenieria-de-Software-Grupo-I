@@ -2,27 +2,21 @@
 class Router {
     private $routes = [];
 
-    public function addRoute($method, $path, $controller, $action) {
-        $this->routes[$method][$path] = ["controller" => $controller, "action" => $action];
+    public function addRoute($method, $uri, $controller, $action) {
+        $this->routes[$method][$uri] = [$controller, $action];
     }
 
     public function dispatch($method, $uri) {
-        $uri = parse_url($uri, PHP_URL_PATH); // Limpia parámetros GET
-
-        foreach ($this->routes[$method] as $route => $handler) {
-            // Convierte {param} en regex para detectar variables dinámicas
-            $pattern = preg_replace('/\{(\w+)\}/', '([^/]+)', $route);
-
-            if (preg_match("#^$pattern$#", $uri, $matches)) {
-                array_shift($matches);
-                $controller = new $handler["controller"]();
-                call_user_func_array([$controller, $handler["action"]], $matches);
+        if (isset($this->routes[$method][$uri])) {
+            [$controllerName, $action] = $this->routes[$method][$uri];
+            $controller = new $controllerName();
+            if (method_exists($controller, $action)) {
+                $controller->$action();
                 return;
             }
         }
 
         http_response_code(404);
-        echo json_encode(["error" => "Ruta no encontrada"]);
+        echo "404 - Página no encontrada: $uri";
     }
 }
-?>
