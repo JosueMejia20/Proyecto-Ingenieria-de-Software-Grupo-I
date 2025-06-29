@@ -7,7 +7,7 @@ class Controllers{
 
     public function formulario(){
         http_response_code(200);
-        include __DIR__."/views/admision_formulario.php";
+        include __DIR__."/Proyecto/views/admision_formulario.php";
     }
 
     public function revisores(){
