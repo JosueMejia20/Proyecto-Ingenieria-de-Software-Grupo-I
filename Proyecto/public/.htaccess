@@ -1,7 +1,6 @@
 RewriteEngine On
-RewriteBase /Proyecto/
+RewriteBase /
 
-# Redirige todo a index.php menos los archivos reales
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
