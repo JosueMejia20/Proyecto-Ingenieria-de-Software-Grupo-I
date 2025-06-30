@@ -2,27 +2,37 @@
 class Router {
     private $routes = [];
 
-    public function addRoute($method, $path, $controller, $action) {
-        $this->routes[$method][$path] = ["controller" => $controller, "action" => $action];
+    public function get($pattern, $controllerAction) {
+        $this->addRoute('GET', $pattern, $controllerAction);
+    }
+
+    public function post($pattern, $controllerAction) {
+        $this->addRoute('POST', $pattern, $controllerAction);
+    }
+
+    private function addRoute($method, $pattern, $controllerAction) {
+        $pattern = '#^' . preg_replace('#\{(\w+)\}#', '(?P<\1>[^/]+)', $pattern) . '$#';
+        $this->routes[$method][$pattern] = $controllerAction;
     }
 
     public function dispatch($method, $uri) {
-        $uri = parse_url($uri, PHP_URL_PATH); // Limpia parámetros GET
+        if (!isset($this->routes[$method])) {
+            http_response_code(405);
+            echo "Método no permitido";
+            return;
+        }
 
-        foreach ($this->routes[$method] as $route => $handler) {
-            // Convierte {param} en regex para detectar variables dinámicas
-            $pattern = preg_replace('/\{(\w+)\}/', '([^/]+)', $route);
-
-            if (preg_match("#^$pattern$#", $uri, $matches)) {
-                array_shift($matches);
-                $controller = new $handler["controller"]();
-                call_user_func_array([$controller, $handler["action"]], $matches);
-                return;
+        foreach ($this->routes[$method] as $pattern => $controllerAction) {
+            if (preg_match($pattern, $uri, $matches)) {
+                [$controllerName, $action] = explode('@', $controllerAction);
+                require_once "Controllers.php";
+                $controller = new $controllerName();
+                $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
+                return call_user_func_array([$controller, $action], $params);
             }
         }
 
         http_response_code(404);
-        echo json_encode(["error" => "Ruta no encontrada"]);
+        echo "404 - Página no encontrada";
     }
 }
-?>

@@ -7,8 +7,8 @@
     <link rel="icon" href="https://biologia.unah.edu.hn/dmsdocument/1433-unah-logo-texto">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/Proyecto/public/assets/css/landing_style.css">
-    <link rel="stylesheet" href="/Proyecto/public/assets/css/loading.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/landing_style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/loading.css">
 
 </head>
 <body>
