@@ -1,15 +1,23 @@
-<?php 
-require_once __DIR__ . "/Controllers.php";
-require_once __DIR__ . "/Routers.php";
+<?php
+require_once 'Controllers.php';
 
-$router = new Router;
+$url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
+$routes = [
+    '' => 'landing',
+    'formulario' => 'formulario',
+    'revisores' => 'revisores',
+    'estudiante' => 'estudiante',
+];
 
-$router->addRoute("GET", "/", "Controllers", "landing");
-$router->addRoute("GET", "/formulario", "Controllers", "formulario");
-$router->addRoute("GET", "/revisor/solicitud", "Controllers", "revisores");
-$router->addRoute("GET", "/estudiantes/perfil", "Controllers", "estudiante");
-// Normalizar URI quitando el prefijo /Proyecto
-$basePath = "/Proyecto";
-$uri = str_replace($basePath, "", $_SERVER["REQUEST_URI"]);
+$controller = new Controllers();
 
-$router->dispatch($_SERVER["REQUEST_METHOD"], $uri);
+if (array_key_exists($url, $routes)) {
+    $method = $routes[$url];
+    if (method_exists($controller, $method)) {
+        $controller->$method();
+        exit;
+    }
+}
+
+http_response_code(404);
+echo "Página no encontrada";
