@@ -6,7 +6,7 @@ class SiteController {
     }
 
     public function formulario() {
-        require __DIR__. '/../../views/admision_formulario.php';
+        require ROOT . '/../../views/admision_formulario.php';
     }
 
     public function verEstudiante($id) {
