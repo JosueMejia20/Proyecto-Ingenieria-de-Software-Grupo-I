@@ -1,16 +1,15 @@
-<?php
+<?php 
+require_once __DIR__ . "/Controllers.php";
+require_once __DIR__ . "/Routers.php";
 
-require_once __DIR__ . '/../app/controllers/HomeController.php';
-require_once __DIR__ . '/../app/controllers/AdmisionesController.php';
+$router = new Router;
 
-$routes = [
-    '' => function () {
-        (new HomeController())->landing();
-    },
-    'formulario' => function () {
-        (new AdmisionesController())->formulario();
-    },
-    'revisiones' => function () {
-        (new AdmisionesController())->revisiones();
-    },
-];
+$router->addRoute("GET", "/", "Controllers", "landing");
+$router->addRoute("GET", "/formulario", "Controllers", "formulario");
+$router->addRoute("GET", "/revisor/solicitud", "Controllers", "revisores");
+$router->addRoute("GET", "/estudiantes/perfil", "Controllers", "estudiante");
+// Normalizar URI quitando el prefijo /Proyecto
+$basePath = "/Proyecto";
+$uri = str_replace($basePath, "", $_SERVER["REQUEST_URI"]);
+
+$router->dispatch($_SERVER["REQUEST_METHOD"], $uri);
